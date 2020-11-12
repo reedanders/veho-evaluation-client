@@ -64,7 +64,7 @@ export default function Sidebar(props) {
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={users[0].image} />
                 </ListItemAvatar>
-                <ListItemText primary={getUsers(users)} secondary={content.substr(0, 15) + ' ... '} />
+                <ListItemText primary={getUsers(users)} secondary={content[0].text.substr(0, 15) + ' ... '} />
               </ListItem>
             </React.Fragment>
           ))}

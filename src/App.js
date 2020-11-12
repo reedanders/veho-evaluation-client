@@ -16,33 +16,27 @@ const messages = [
   {
     id: 1,
     users: [{user: 'Adam G', image: adamg}],
-    content: "I'll be in the neighbourhood this week. Let's grab a bite to eat",
-    person: '',
+    content: [{timestamp: 123123, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
   {
     id: 2,
     users: [{user: 'Fred C', image: fredc}],
-    content: `Do you have a suggestion for a good present for John on his work
-      anniversary. I am really confused & would love your thoughts on it.`,
-    person: '/static/images/avatar/1.jpg',
+    content: [{timestamp: 123123, user: {user: 'Fred C', image: fredc}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
   {
     id: 3,
-    users: [{user: 'James L', image: jamesl}, {user: 'Hamar Z', image: hamarz},],
-    content: 'I am try out this new BBQ recipe, I think this might be amazing',
-    person: '/static/images/avatar/2.jpg',
+    users: [{user: 'James L', image: jamesl}, {user: 'James L', image: hamarz},],
+    content: [{timestamp: 123123, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
   {
     id: 4,
     users: [{user: 'Hamar Z', image: hamarz},],
-    content: 'I have the tickets to the ReactConf for this year.',
-    person: '/static/images/avatar/3.jpg',
+    content: [{timestamp: 123123, user: {user: 'Hamar Z', image: hamarz}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
   {
     id: 5,
     users: [{user: 'Myles T', image: mylest},],
-    content: 'My appointment for the doctor was rescheduled for next Saturday.',
-    person: '/static/images/avatar/4.jpg',
+    content: [{timestamp: 123123, user: {user: 'Myles T', image: mylest}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
 ];
 
