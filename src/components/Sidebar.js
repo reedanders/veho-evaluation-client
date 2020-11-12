@@ -3,6 +3,11 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
 
 const drawerWidth = 240;
 
@@ -27,16 +32,10 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
 }));
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  const { messages } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -54,7 +53,19 @@ export default function Sidebar() {
       }}
       open={open}
     >
-      <p>test</p>
+      <List className={classes.list}>
+          {messages.map(({ id, users, content, person }) => (
+            <React.Fragment key={id}>
+              <ListItem button>
+                <ListItemAvatar>
+                  <Avatar alt="Profile Picture" src={person} />
+                </ListItemAvatar>
+                <ListItemText primary={users.join(', ').substr(0, 15)} secondary={content.substr(0, 15) + ' ... '} />
+              </ListItem>
+            </React.Fragment>
+          ))}
+        </List>
+
     </Drawer>
   );
 }

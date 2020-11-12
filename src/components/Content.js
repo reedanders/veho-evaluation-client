@@ -1,11 +1,13 @@
 import React from 'react';
-import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import AppBar from '@material-ui/core/AppBar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+
+import Namebar from './Namebar';
+import Messages from './Messages';
 
 const drawerWidth = 240;
 
@@ -25,20 +27,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Content() {
+export default function Content(props) {
+  const { messages } = props;
   const classes = useStyles();
   
 
   return (
     <Container maxWidth="lg" className={classes.container}>
-      <AppBar position="static">
-        <p>name</p>
-      </AppBar>
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={12} lg={12}>
-            <p>chat</p>
-        </Grid>
-      </Grid>
+      
+      <Namebar users={messages.users}/>
+      
+      <Messages users={messages.content}/>
+
     </Container>
   );
 }
