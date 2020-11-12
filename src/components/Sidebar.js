@@ -8,6 +8,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 const drawerWidth = 240;
 
@@ -44,6 +45,9 @@ export default function Sidebar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const getUsers = users => {
+    return users.length > 1 ? users[0].user + ', ...' : users[0].user;
+  };
 
   return (
     <Drawer
@@ -54,18 +58,19 @@ export default function Sidebar(props) {
       open={open}
     >
       <List className={classes.list}>
-          {messages.map(({ id, users, content, person }) => (
+          {messages.map(({ id, users, content }) => (
             <React.Fragment key={id}>
               <ListItem button>
                 <ListItemAvatar>
-                  <Avatar alt="Profile Picture" src={person} />
+                  <Avatar alt="Profile Picture" src={users[0].image} />
                 </ListItemAvatar>
-                <ListItemText primary={users.join(', ').substr(0, 15)} secondary={content.substr(0, 15) + ' ... '} />
+                <ListItemText primary={getUsers(users)} secondary={content.substr(0, 15) + ' ... '} />
               </ListItem>
             </React.Fragment>
           ))}
         </List>
-
+        
+      <Button variant="contained">New Conversation</Button>
     </Drawer>
   );
 }
