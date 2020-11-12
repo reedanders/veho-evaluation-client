@@ -39,12 +39,7 @@ export default function Sidebar(props) {
   const { messages } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+
   const getUsers = users => {
     return users.length > 1 ? users[0].user + ', ...' : users[0].user;
   };
@@ -60,7 +55,7 @@ export default function Sidebar(props) {
       <List className={classes.list}>
           {messages.map(({ id, users, content }) => (
             <React.Fragment key={id}>
-              <ListItem button>
+              <ListItem button onClick={() => console.log('asdfdsf')}>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={users[0].image} />
                 </ListItemAvatar>

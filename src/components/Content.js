@@ -1,10 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
-import AppBar from '@material-ui/core/AppBar';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 
 import Namebar from './Namebar';
 import Messages from './Messages';
@@ -28,16 +25,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Content(props) {
-  const { messages } = props;
+  const { messages, page } = props;
   const classes = useStyles();
-  
+  const [chat, setChat] = useState(false);
 
-  return (
+  useEffect(() => {
+    
+    setChat(messages.filter(msg => msg.id === parseInt(page))[0]);
+
+  }, [page]);
+
+  return (chat &&
     <Container maxWidth="lg" className={classes.container}>
       
-      <Namebar users={messages.users}/>
-      
-      <Messages users={messages.content}/>
+      <Namebar users={chat.users}/>
+      <Messages content={chat.content}/>
 
     </Container>
   );
