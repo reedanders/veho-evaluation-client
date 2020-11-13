@@ -31,3 +31,23 @@ export const initMessages = [
     content: [{timestamp: 1605291986318, user: {user: 'Myles T', image: mylest}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
 ];
+
+
+export const gibberish = [
+  "Yes, and one of them is enormous.", 
+  "Yes, and he’s swimming toward us.",
+  "Yes, and he looks hungry.",
+  "Yes, and we are trapped in this boat.",
+  "Yes, and he looks more like a whale than a fish.",
+  "Yes, and now the motor won’t start.",
+  "Yes, and he’s about to eat us.",
+  "Yes and I just remembered that this boat is also a plane.",
+  "Yes and lucky for you I just got my pilot’s license.",
+  "Uh Oh...",
+  "Crazy sauce",
+  "Nope. Nah ah.",
+  "That sounds more like a boat than a panda.",
+  "Definitely a wild animal.",
+  "I come from a very big family... nine parents.",
+  "The only advantage to wearing glasses is that you can do that dramatic removal.",
+  "Have you seen the bologna that has the olives in it? Who's that for?"]

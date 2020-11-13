@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 
 import Content from './Content';
 
-import { initMessages } from '../libs/dataLib';
+import { initMessages, gibberish } from '../libs/dataLib';
 
 const drawerWidth = 240;
 
@@ -42,6 +42,10 @@ function Landing(props) {
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
 
+  function randomDelay() {
+      return Math.floor(60000 * Math.random())
+  }
+
   const getUsers = users => {
     const joinedUsers = users.map(x => x.user).join(', ');
     return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
@@ -56,10 +60,21 @@ function Landing(props) {
   function updateChat(input) {
     const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
     const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
-    
+    // TODO Should use setMessages, DRY
     messages[index].content.push(newInput)
+    history.push(`/${selectedChat}`);
+  }
 
-    console.log(input, index, messages[index]);
+  function createResponse() {
+    setTimeout( () => {
+      const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
+      const gibber = gibberish[Math.floor(Math.random() * gibberish.length)]
+      const newInput = {'timestamp': Date.now(), 'user': {'user': 'Adam G', 'image':'todo'}, 'text': gibber,};
+
+      // TODO Should use setMessages, DRY
+      messages[index].content.push(newInput)
+      history.push(`/${selectedChat}`);
+    }, randomDelay() )
   }
 
   async function handleSubmit(event) {
@@ -70,6 +85,10 @@ function Landing(props) {
         input,
       });
       history.push(`/${selectedChat}`);
+      setInput("");
+
+      await createResponse();
+      
     } catch (e) {
       console.log(e)
     }
@@ -127,6 +146,7 @@ function Landing(props) {
               id="text" 
               value={input}
               variant="outlined" 
+              fullWidth
               onChange={(e) => setInput(e.target.value)}/>
             <Button
               type="submit"

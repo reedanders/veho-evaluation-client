@@ -6,8 +6,6 @@ import Container from '@material-ui/core/Container';
 import Namebar from './Namebar';
 import Messages from './Messages';
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(2),
