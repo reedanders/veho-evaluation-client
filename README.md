@@ -4,7 +4,7 @@ This app is a submission for the Veho Evaluation. The requirements and wireframe
 
 ### Running the app
 
-The boilerplate for this app was created with `create react app` and additionally uses the material-ui component library. 
+The boilerplate for this app was created with `create react app` and additionally uses the material-ui component library.
 
 Set up the app with the following:
 
@@ -21,7 +21,8 @@ npm start
 ```
 
 ### Overview of implementation
-The conversation application is very similar in structure to a dashboard app. It has a fixed sidebar with links and a larger content area that updates based on which link is selected. Data is simulated and manipulated locally. 
+
+The conversation application is very similar in structure to a dashboard app. It has a fixed sidebar with links and a larger content area that updates based on which link is selected. Data is simulated and manipulated locally.
 
 ### Limitations
 

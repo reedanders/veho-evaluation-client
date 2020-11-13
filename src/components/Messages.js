@@ -1,6 +1,6 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
 import ChatBubble from "./ChatBubble";
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   },
 }));
@@ -23,8 +23,13 @@ export default function Messages(props) {
   return (
     <div className={classes.root}>
       <Grid container direction="column" spacing={3}>
-        {content.map(({ timestamp, text, user}) => (
-            <ChatBubble key={timestamp} timestamp={timestamp} text={text} user={user}/>
+        {content.map(({ timestamp, text, user }) => (
+          <ChatBubble
+            key={timestamp}
+            timestamp={timestamp}
+            text={text}
+            user={user}
+          />
         ))}
       </Grid>
     </div>

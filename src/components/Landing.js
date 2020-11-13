@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import React, { useState, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+import ListItemText from "@material-ui/core/ListItemText";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
-import Content from './Content';
-import Dialogue from './Dialogue';
+import Content from "./Content";
+import Dialogue from "./Dialogue";
 
-import { initMessages, gibberish, userList } from '../libs/dataLib';
+import { initMessages, gibberish, userList } from "../libs/dataLib";
 
 const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+    display: "flex",
   },
   drawer: {
     width: drawerWidth,
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
   },
   content: {
-    minHeight: '90vh', //not ideal, replace with flexbox
+    minHeight: "90vh", //not ideal, replace with flexbox
   },
   list: {
-    minHeight: '90vh', //not ideal, replace with flexbox
+    minHeight: "90vh", //not ideal, replace with flexbox
   },
   listButton: {
     marginLeft: theme.spacing(2),
@@ -42,10 +42,10 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
   },
   input: {
-    display: 'flex',
+    display: "flex",
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-  }
+  },
 }));
 
 function Landing(props) {
@@ -61,23 +61,30 @@ function Landing(props) {
   const [selectedValue, setSelectedValue] = React.useState(userList[1]);
 
   function randomDelay() {
-      return Math.floor(60000 * Math.random())
+    return Math.floor(60000 * Math.random());
   }
 
   function validateForm() {
-    return input.charAt(0).toUpperCase() === input.charAt(0) && !!input.slice(-1).match(/^[.!?]/);
+    return (
+      input.charAt(0).toUpperCase() === input.charAt(0) &&
+      !!input.slice(-1).match(/^[.!?]/)
+    );
   }
 
-  const getUsers = users => {
-    const joinedUsers = users.map(x => x.user.split(" ")[0] + " " + x.user.split(" ")[1][0] + ".").join(', ');
-    return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
+  const getUsers = (users) => {
+    const joinedUsers = users
+      .map((x) => x.user.split(" ")[0] + " " + x.user.split(" ")[1][0] + ".")
+      .join(", ");
+    return joinedUsers.length > 15
+      ? joinedUsers.substr(0, 15) + " ... "
+      : joinedUsers;
   };
 
-  const clipText = content => {
+  const clipText = (content) => {
     if (content[0].text) {
-      return content[0].text.substr(0, 20) + ' ... '
+      return content[0].text.substr(0, 20) + " ... ";
     } else {
-      return content.length > 1 ? content[1].text.substr(0, 20) + ' ... ' : "";
+      return content.length > 1 ? content[1].text.substr(0, 20) + " ... " : "";
     }
   };
 
@@ -98,49 +105,60 @@ function Landing(props) {
   };
 
   const addChat = (user) => {
-
-    const id = messages.length+1
+    const id = messages.length + 1;
     const newChat = {
       id: id,
       users: [user],
-      content: [{timestamp: Date.now(), user: {user: 'Reed A', image: 'todo'}, text: ""}],
-    }
-    setselectedChat(id)
+      content: [
+        {
+          timestamp: Date.now(),
+          user: { user: "Reed A", image: "todo" },
+          text: "",
+        },
+      ],
+    };
+    setselectedChat(id);
     messages.push(newChat);
-
   };
 
   const updateMessages = (input, index, id) => {
-
     const newMessages = messages;
-    newMessages[index].content.push(input)
+    newMessages[index].content.push(input);
     setMessages(newMessages);
     history.push(`/${id}`);
-
-
   };
 
   function updateChat(input) {
-
-    const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
-    const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
+    const index = messages.findIndex(
+      (msg) => msg.id === parseInt(selectedChat)
+    );
+    const newInput = {
+      timestamp: Date.now(),
+      user: { user: "Reed A", image: "todo" },
+      text: input.input,
+    };
 
     updateMessages(newInput, index, selectedChat);
-
-  };
+  }
 
   function createResponse() {
-
-    setTimeout( () => {
-      const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
-      const gibber = gibberish[Math.floor(Math.random() * gibberish.length)]
-      const newInput = {'timestamp': Date.now(), 'user': {'user': messages[index].users[0].user, 'image':messages[index].users[0].image}, 'text': gibber,};
+    setTimeout(() => {
+      const index = messages.findIndex(
+        (msg) => msg.id === parseInt(selectedChat)
+      );
+      const gibber = gibberish[Math.floor(Math.random() * gibberish.length)];
+      const newInput = {
+        timestamp: Date.now(),
+        user: {
+          user: messages[index].users[0].user,
+          image: messages[index].users[0].image,
+        },
+        text: gibber,
+      };
 
       updateMessages(newInput, index, selectedChat);
-
-    }, randomDelay() )
-
-  };
+    }, randomDelay());
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -153,81 +171,91 @@ function Landing(props) {
       setInput("");
 
       await createResponse();
-      
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   }
 
   useEffect(() => {
-    
-      setselectedChat(1)
-      history.push(`/${1}`);
+    setselectedChat(1);
+    history.push(`/${1}`);
+  }, [history]);
 
-  }, [history]);  
+  return (
+    selectedChat && (
+      <div className={classes.root}>
+        <CssBaseline />
+        <Drawer
+          variant="permanent"
+          className={classes.drawer}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor="left"
+        >
+          <List className={classes.list}>
+            {messages.map(({ id, users, content }) => (
+              <React.Fragment key={id}>
+                <ListItem
+                  button
+                  onClick={() => handleChange(id)}
+                  selected={selectedChat === id}
+                >
+                  <ListItemAvatar>
+                    <Avatar alt="Profile Picture" src={users[0].image} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={getUsers(users)}
+                    secondary={clipText(content)}
+                  />
+                </ListItem>
+              </React.Fragment>
+            ))}
+          </List>
 
-
-  return ( selectedChat && 
-    <div className={classes.root}>
-      <CssBaseline />
-          <Drawer
-            variant="permanent"
-            className={classes.drawer}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            anchor="left"
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleClickOpen}
+            className={classes.listButton}
           >
-            <List className={classes.list}>
-                {messages.map(({ id, users, content }) => (
-                  <React.Fragment key={id}>
-                    <ListItem button onClick={() => handleChange(id)} selected={selectedChat === id}>
-                      <ListItemAvatar>
-                        <Avatar alt="Profile Picture" src={users[0].image} />
-                      </ListItemAvatar>
-                      <ListItemText 
-                        primary={getUsers(users)} 
-                        secondary={clipText(content)}/>
-                    </ListItem>
-                  </React.Fragment>
-                ))}
-              </List>
-            
-            <Button 
-              variant="contained" 
-              color="primary" 
-              onClick={handleClickOpen}
-              className={classes.listButton}>
-                New Conversation
-            </Button>
-            <Dialogue selectedValue={selectedValue} open={open} onClose={handleClose} userList={userList}/>
-          </Drawer>
-        
+            New Conversation
+          </Button>
+          <Dialogue
+            selectedValue={selectedValue}
+            open={open}
+            onClose={handleClose}
+            userList={userList}
+          />
+        </Drawer>
 
-      <Grid container direction="column">
-        <Grid item className={classes.content}>
-          <Content messages={messages} page={selectedChat}/>
+        <Grid container direction="column">
+          <Grid item className={classes.content}>
+            <Content messages={messages} page={selectedChat} />
+          </Grid>
+          <Grid item>
+            <form className={classes.input} noValidate onSubmit={handleSubmit}>
+              <TextField
+                id="text"
+                value={input}
+                variant="outlined"
+                label="Enter a new message as a complete sentence."
+                fullWidth
+                onChange={(e) => setInput(e.target.value)}
+              />
+              <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={!validateForm()}
+              >
+                Send
+              </Button>
+            </form>
+          </Grid>
         </Grid>
-        <Grid item>
-          <form className={classes.input} noValidate onSubmit={handleSubmit}>
-            <TextField 
-              id="text" 
-              value={input}
-              variant="outlined"
-              label="Enter a new message as a complete sentence."
-              fullWidth
-              onChange={(e) => setInput(e.target.value)}/>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              disabled={!validateForm()}>Send
-            </Button>
-          </form>
-        </Grid>
-      </Grid>
-
-    </div>
+      </div>
+    )
   );
 }
 
