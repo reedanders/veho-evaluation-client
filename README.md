@@ -26,7 +26,12 @@ The conversation application is very similar in structure to a dashboard app. It
 
 ### Limitations
 
-There are a few items wanted to complete, but wanted to keep to your timeframe. I would finish these in another hour.
+Below are some of the items I didn't finish within the alloted 6 hours, but I still wanted the app mostly complete and worked more an hour more to complete them. You can find this _almost_ complete branch here:
+
+```
+git checkout complete
+npm start
+```
 
 - [x] User can create a new conversation with multiple users.
 - [x] User can see full names or first and last initial.
