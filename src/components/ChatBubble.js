@@ -37,32 +37,32 @@ export default function Messages(props) {
   const classes = useStyles();
 
   return (
-      (user.user === 'Reed A' ? 
-
-      <Grid container item direction="column" justify="flex-end" alignItems="flex-end">
-        <Grid item>
-          <Paper className={classes.paperUser}>{text}</Paper>
-        </Grid>
-        <Grid item>
-          <Typography variant="caption" className={classes.captionUser}>
-            {user.user} on {formatDate(timestamp)}
-          </Typography>
-        </Grid>
-      </Grid>
-
-       : 
-
-      <Grid container item direction="column" justify="flex-start" alignItems="flex-start">
-        <Grid item>
-          <Paper className={classes.paperGuest}>{text}</Paper>
-        </Grid>
-        <Grid item>
-          <Typography variant="caption" className={classes.captionGuest}>
-            {user.user} on {formatDate(timestamp)}
-          </Typography>
-        </Grid>
-      </Grid>
-
-      )
+      (text && (user.user === 'Reed A' ? 
+      
+            <Grid container item direction="column" justify="flex-end" alignItems="flex-end">
+              <Grid item>
+                <Paper className={classes.paperUser}>{text}</Paper>
+              </Grid>
+              <Grid item>
+                <Typography variant="caption" className={classes.captionUser}>
+                  {user.user} on {formatDate(timestamp)}
+                </Typography>
+              </Grid>
+            </Grid>
+      
+             : 
+      
+            <Grid container item direction="column" justify="flex-start" alignItems="flex-start">
+              <Grid item>
+                <Paper className={classes.paperGuest}>{text}</Paper>
+              </Grid>
+              <Grid item>
+                <Typography variant="caption" className={classes.captionGuest}>
+                  {user.user} on {formatDate(timestamp)}
+                </Typography>
+              </Grid>
+            </Grid>
+      
+            ))
   );
 }

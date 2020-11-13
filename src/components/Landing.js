@@ -12,8 +12,9 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 import Content from './Content';
+import Dialogue from './Dialogue';
 
-import { initMessages, gibberish } from '../libs/dataLib';
+import { initMessages, gibberish, userList } from '../libs/dataLib';
 
 const drawerWidth = 260;
 
@@ -58,6 +59,8 @@ function Landing(props) {
   const [selectedChat, setselectedChat] = useState(1);
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
+  const [open, setOpen] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState(userList[1]);
 
   function randomDelay() {
       return Math.floor(60000 * Math.random())
@@ -78,16 +81,42 @@ function Landing(props) {
     setInput("");
   };
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+    setSelectedValue(value);
+    addChat(value);
+  };
+
+  const addChat = (user) => {
+
+    const id = messages.length+1
+    const newChat = {
+      id: id,
+      users: [user],
+      content: [{timestamp: Date.now(), user: {user: 'Reed A', image: 'todo'}, text: ""}],
+    }
+    setselectedChat(id)
+    messages.push(newChat);
+
+  };
+
   function updateChat(input) {
+
     const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
     const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
 
     // TODO Should use setMessages, DRY
     messages[index].content.push(newInput)
     history.push(`/${selectedChat}`);
-  }
+
+  };
 
   function createResponse() {
+
     setTimeout( () => {
       const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
       const gibber = gibberish[Math.floor(Math.random() * gibberish.length)]
@@ -97,7 +126,8 @@ function Landing(props) {
       messages[index].content.push(newInput)
       history.push(`/${selectedChat}`);
     }, randomDelay() )
-  }
+
+  };
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -148,13 +178,22 @@ function Landing(props) {
                       <ListItemAvatar>
                         <Avatar alt="Profile Picture" src={users[0].image} />
                       </ListItemAvatar>
-                      <ListItemText primary={getUsers(users)} secondary={content[0].text.substr(0, 20) + ' ... '} />
+                      <ListItemText 
+                        primary={getUsers(users)} 
+                        secondary={content[0].text ? content[0].text.substr(0, 20) + ' ... ' : "" } />
                     </ListItem>
                   </React.Fragment>
                 ))}
               </List>
-              
-            <Button variant="contained" className={classes.listButton}>New Conversation</Button>
+            
+            <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={handleClickOpen}
+              className={classes.listButton}>
+                New Conversation
+            </Button>
+            <Dialogue selectedValue={selectedValue} open={open} onClose={handleClose} userList={userList}/>
           </Drawer>
         
 
