@@ -52,9 +52,7 @@ function Landing(props) {
   const classes = useStyles();
 
   // Routing utils for tab navigation
-  const { match, history } = props;
-  const { params } = match;
-  const { page } = params;
+  const { history } = props;
 
   const [selectedChat, setselectedChat] = useState(1);
   const [messages, setMessages] = useState(initMessages);
@@ -104,14 +102,22 @@ function Landing(props) {
 
   };
 
+  const updateMessages = (input, index, id) => {
+
+    const newMessages = messages;
+    newMessages[index].content.push(input)
+    setMessages(newMessages);
+    history.push(`/${id}`);
+
+
+  };
+
   function updateChat(input) {
 
     const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
     const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
 
-    // TODO Should use setMessages, DRY
-    messages[index].content.push(newInput)
-    history.push(`/${selectedChat}`);
+    updateMessages(newInput, index, selectedChat);
 
   };
 
@@ -122,9 +128,8 @@ function Landing(props) {
       const gibber = gibberish[Math.floor(Math.random() * gibberish.length)]
       const newInput = {'timestamp': Date.now(), 'user': {'user': messages[index].users[0].user, 'image':messages[index].users[0].image}, 'text': gibber,};
 
-      // TODO Should use setMessages, DRY
-      messages[index].content.push(newInput)
-      history.push(`/${selectedChat}`);
+      updateMessages(newInput, index, selectedChat);
+
     }, randomDelay() )
 
   };
@@ -148,16 +153,10 @@ function Landing(props) {
 
   useEffect(() => {
     
-    const ids = messages.map(msg => msg.id);
-
-    if (ids.includes(page)) {
-      setselectedChat(page)
-    } else {
       setselectedChat(1)
       history.push(`/${1}`);
-    }
 
-  }, []);  
+  }, [history]);  
 
 
   return ( selectedChat && 

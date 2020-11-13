@@ -32,5 +32,5 @@ There are a few items wanted to complete, but wanted to keep to your timeframe. 
 - [ ] User can see others' icon next to chat bubbles.
 - [ ] User receives help text if their chat input is not valid.
 - [ ] User can see sticky bar (top) and text input (bottom) on content.
-- [ ] React-router redirects for invalid url. (This is currently handled in useEffect and results in a missing dependency warning).
+- [x] React-router redirects for invalid url. (This is currently handled in useEffect and results in a missing dependency warning).
 - [ ] Clean up with `yarn prettier`
