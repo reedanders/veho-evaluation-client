@@ -47,10 +47,18 @@ const messages = [
   },
 ];
 
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
   },
 }));
 
@@ -78,10 +86,13 @@ function Landing(props) {
     <div className={classes.root}>
       <CssBaseline />
 
-      <Grid container>
-        <Grid item md={3}>
           <Drawer
             variant="permanent"
+            className={classes.drawer}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor="left"
           >
             <List className={classes.list}>
                 {messages.map(({ id, users, content }) => (
@@ -98,13 +109,12 @@ function Landing(props) {
               
             <Button variant="contained">New Conversation</Button>
           </Drawer>
-        </Grid>
+        
 
-        <Grid item md={9}>
-          <Content messages={messages} page={selectedChat} />
-        </Grid>
-
+      <Grid container>
+        <Content messages={messages} page={selectedChat} />
       </Grid>
+
     </div>
   );
 }
