@@ -85,7 +85,6 @@ function Landing(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-
           <Drawer
             variant="permanent"
             className={classes.drawer}
