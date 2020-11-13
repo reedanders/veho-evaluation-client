@@ -34,4 +34,4 @@ There are a few items wanted to complete, but wanted to keep to your timeframe. 
 - [ ] User receives help text if their chat input is not valid.
 - [ ] User can see sticky bar (top) and text input (bottom) on content.
 - [x] React-router redirects for invalid url. (This is currently handled in useEffect and results in a missing dependency warning).
-- [ ] Clean up with `yarn prettier`
+- [x] Clean up with `yarn prettier`
