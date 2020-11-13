@@ -7,27 +7,27 @@ import mylest from '../assets/images/mylest.png';
 export const initMessages = [
   {
     id: 1,
-    users: [{user: 'Adam G', image: adamg}],
+    users: [{user: 'Adam Gibbons', image: adamg}],
     content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "Definitely a wild animal."},{timestamp: 1605291986318, user: {user: 'Reed A', image: adamg}, text: "Pardon?"}],
   },
   {
     id: 2,
-    users: [{user: 'Fred C', image: fredc}],
+    users: [{user: 'Fred Cook', image: fredc}],
     content: [{timestamp: 1605291986318, user: {user: 'Fred C', image: fredc}, text: "Nope. Nah ah."}],
   },
   {
     id: 3,
-    users: [{user: 'James L', image: jamesl}, {user: 'Hamar Z', image: hamarz},],
+    users: [{user: 'James Logue', image: jamesl}, {user: 'Itamar Zur', image: hamarz},],
     content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "Yes, and now the motor won’t start."}],
   },
   {
     id: 4,
-    users: [{user: 'Hamar Z', image: hamarz},],
-    content: [{timestamp: 1605291986318, user: {user: 'Hamar Z', image: hamarz}, text: "Have you seen the bologna that has the olives in it? Who's that for?"}],
+    users: [{user: 'Itamar Zur', image: hamarz},],
+    content: [{timestamp: 1605291986318, user: {user: 'Itamar Zur', image: hamarz}, text: "Have you seen the bologna that has the olives in it? Who's that for?"}],
   },
   {
     id: 5,
-    users: [{user: 'Myles T', image: mylest},],
+    users: [{user: 'Myles Tee', image: mylest},],
     content: [{timestamp: 1605291986318, user: {user: 'Myles T', image: mylest}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
 ];

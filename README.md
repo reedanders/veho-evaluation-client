@@ -28,7 +28,7 @@ The conversation application is very similar in structure to a dashboard app. It
 There are a few items wanted to complete, but wanted to keep to your timeframe. I would finish these in another hour.
 
 - [ ] User can create a new conversation.
-- [ ] User can see full names or first and last initial.
+- [x] User can see full names or first and last initial.
 - [ ] User can see others' icon next to chat bubbles.
 - [ ] User receives help text if their chat input is not valid.
 - [ ] User can see sticky bar (top) and text input (bottom) on content.

@@ -68,7 +68,7 @@ function Landing(props) {
   }
 
   const getUsers = users => {
-    const joinedUsers = users.map(x => x.user).join(', ');
+    const joinedUsers = users.map(x => x.user.split(" ")[0] + " " + x.user.split(" ")[1][0] + ".").join(', ');
     return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
   };
 
