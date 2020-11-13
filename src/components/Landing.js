@@ -73,6 +73,14 @@ function Landing(props) {
     return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
   };
 
+  const clipText = content => {
+    if (content[0].text) {
+      return content[0].text.substr(0, 20) + ' ... '
+    } else {
+      return content.length > 1 ? content[1].text.substr(0, 20) + ' ... ' : "";
+    }
+  };
+
   const handleChange = (id) => {
     history.push(`/${id}`);
     setselectedChat(id);
@@ -179,7 +187,7 @@ function Landing(props) {
                       </ListItemAvatar>
                       <ListItemText 
                         primary={getUsers(users)} 
-                        secondary={content[0].text ? content[0].text.substr(0, 20) + ' ... ' : "" } />
+                        secondary={clipText(content)}/>
                     </ListItem>
                   </React.Fragment>
                 ))}
