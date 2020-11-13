@@ -22,7 +22,7 @@ export default function Namebar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="sticky" elevation={0}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             {users.map(x => x.user).join(', ')}
