@@ -21,8 +21,7 @@ npm start
 ```
 
 ### Overview of implementation
-
-The conversation application is very similar in structure to a dashboard app. It has a fixed sidebar with links and a larger content area that updates based on which link is selected. Local data is simulated with a dummy api call. I also had time to make the app mobile first, meaning the sidebar is collapsibe at a mobile media size. 
+The conversation application is very similar in structure to a dashboard app. It has a fixed sidebar with links and a larger content area that updates based on which link is selected. Data is simulated and manipulated locally. 
 
 ### Limitations
 
