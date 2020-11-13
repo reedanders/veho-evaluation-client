@@ -58,7 +58,6 @@ function Landing(props) {
   const [messages, setMessages] = useState(initMessages);
   const [input, setInput] = useState("");
   const [open, setOpen] = React.useState(false);
-  const [selectedValue, setSelectedValue] = React.useState(userList[1]);
 
   function randomDelay() {
     return Math.floor(60000 * Math.random());
@@ -100,7 +99,6 @@ function Landing(props) {
 
   const handleClose = (value) => {
     setOpen(false);
-    setSelectedValue(value);
     addChat(value);
   };
 
@@ -108,7 +106,7 @@ function Landing(props) {
     const id = messages.length + 1;
     const newChat = {
       id: id,
-      users: [user],
+      users: user,
       content: [
         {
           timestamp: Date.now(),
@@ -222,7 +220,6 @@ function Landing(props) {
             New Conversation
           </Button>
           <Dialogue
-            selectedValue={selectedValue}
             open={open}
             onClose={handleClose}
             userList={userList}

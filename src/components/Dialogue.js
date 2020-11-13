@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,15 +7,21 @@ import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
 
-export default function SimpleDialog(props) {
-  const { onClose, selectedValue, open, userList } = props;
+export default function Dialogue(props) {
+  const { onClose, open, userList } = props;
+  const [targets, setTargets] = useState([]);
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose(targets);
+    setTargets([]);
   };
 
   const handleListItemClick = (value) => {
-    onClose(value);
+    setTargets([...targets, value]);
+  };
+
+  const isSelected = (user) => {
+    return targets && (targets.includes(user));
   };
 
   return (
@@ -31,6 +37,7 @@ export default function SimpleDialog(props) {
             button
             onClick={() => handleListItemClick(user)}
             key={user.user}
+            selected={isSelected(user)}
           >
             <ListItemAvatar>
               <Avatar alt={user.user} src={user.image} />
@@ -38,6 +45,11 @@ export default function SimpleDialog(props) {
             <ListItemText primary={user.user} />
           </ListItem>
         ))}
+
+        <ListItem autoFocus button onClick={() => handleClose(targets)}>
+          <ListItemText primary="Start Chat" align="center"/>
+        </ListItem>
+
       </List>
     </Dialog>
   );
