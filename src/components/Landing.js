@@ -15,7 +15,7 @@ import Content from './Content';
 
 import { initMessages, gibberish } from '../libs/dataLib';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +28,23 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
+  content: {
+    minHeight: '90vh', //not ideal, replace with flexbox
+  },
+  list: {
+    minHeight: '90vh', //not ideal, replace with flexbox
+  },
+  listButton: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+  },
+  input: {
+    display: 'flex',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  }
 }));
 
 function Landing(props) {
@@ -46,6 +63,10 @@ function Landing(props) {
       return Math.floor(60000 * Math.random())
   }
 
+  function validateForm() {
+    return input.charAt(0).toUpperCase() === input.charAt(0) && !!input.slice(-1).match(/^[.!?]/);
+  }
+
   const getUsers = users => {
     const joinedUsers = users.map(x => x.user).join(', ');
     return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
@@ -60,6 +81,7 @@ function Landing(props) {
   function updateChat(input) {
     const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
     const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
+
     // TODO Should use setMessages, DRY
     messages[index].content.push(newInput)
     history.push(`/${selectedChat}`);
@@ -69,7 +91,7 @@ function Landing(props) {
     setTimeout( () => {
       const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
       const gibber = gibberish[Math.floor(Math.random() * gibberish.length)]
-      const newInput = {'timestamp': Date.now(), 'user': {'user': 'Adam G', 'image':'todo'}, 'text': gibber,};
+      const newInput = {'timestamp': Date.now(), 'user': {'user': messages[index].users[0].user, 'image':messages[index].users[0].image}, 'text': gibber,};
 
       // TODO Should use setMessages, DRY
       messages[index].content.push(newInput)
@@ -132,26 +154,28 @@ function Landing(props) {
                 ))}
               </List>
               
-            <Button variant="contained">New Conversation</Button>
+            <Button variant="contained" className={classes.listButton}>New Conversation</Button>
           </Drawer>
         
 
       <Grid container direction="column">
-        <Grid item>
-          <Content messages={messages} page={selectedChat} />
+        <Grid item className={classes.content}>
+          <Content messages={messages} page={selectedChat}/>
         </Grid>
         <Grid item>
-          <form className={classes.root} noValidate onSubmit={handleSubmit}>
+          <form className={classes.input} noValidate onSubmit={handleSubmit}>
             <TextField 
               id="text" 
               value={input}
-              variant="outlined" 
+              variant="outlined"
+              label="Enter a new message as a complete sentence."
               fullWidth
               onChange={(e) => setInput(e.target.value)}/>
             <Button
               type="submit"
               variant="contained"
-              color="primary">Send
+              color="primary"
+              disabled={!validateForm()}>Send
             </Button>
           </form>
         </Grid>

@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,9 +39,11 @@ export default function Messages(props) {
   return (
       (user.user === 'Reed A' ? 
 
-      <Grid container justify="flex-end" item>
+      <Grid container item direction="column" justify="flex-end" alignItems="flex-end">
         <Grid item>
           <Paper className={classes.paperUser}>{text}</Paper>
+        </Grid>
+        <Grid item>
           <Typography variant="caption" className={classes.captionUser}>
             {user.user} on {formatDate(timestamp)}
           </Typography>
@@ -51,9 +52,11 @@ export default function Messages(props) {
 
        : 
 
-      <Grid container justify="flex-start" item>
+      <Grid container item direction="column" justify="flex-start" alignItems="flex-start">
         <Grid item>
           <Paper className={classes.paperGuest}>{text}</Paper>
+        </Grid>
+        <Grid item>
           <Typography variant="caption" className={classes.captionGuest}>
             {user.user} on {formatDate(timestamp)}
           </Typography>

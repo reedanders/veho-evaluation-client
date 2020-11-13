@@ -8,22 +8,22 @@ export const initMessages = [
   {
     id: 1,
     users: [{user: 'Adam G', image: adamg}],
-    content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"},{timestamp: 121212, user: {user: 'Reed A', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
+    content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "Definitely a wild animal."},{timestamp: 1605291986318, user: {user: 'Reed A', image: adamg}, text: "Pardon?"}],
   },
   {
     id: 2,
     users: [{user: 'Fred C', image: fredc}],
-    content: [{timestamp: 1605291986318, user: {user: 'Fred C', image: fredc}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
+    content: [{timestamp: 1605291986318, user: {user: 'Fred C', image: fredc}, text: "Nope. Nah ah."}],
   },
   {
     id: 3,
     users: [{user: 'James L', image: jamesl}, {user: 'Hamar Z', image: hamarz},],
-    content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
+    content: [{timestamp: 1605291986318, user: {user: 'Adam G', image: adamg}, text: "Yes, and now the motor won’t start."}],
   },
   {
     id: 4,
     users: [{user: 'Hamar Z', image: hamarz},],
-    content: [{timestamp: 1605291986318, user: {user: 'Hamar Z', image: hamarz}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
+    content: [{timestamp: 1605291986318, user: {user: 'Hamar Z', image: hamarz}, text: "Have you seen the bologna that has the olives in it? Who's that for?"}],
   },
   {
     id: 5,
