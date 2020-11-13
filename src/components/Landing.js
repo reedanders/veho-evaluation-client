@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 
 import Sidebar from './Sidebar';
 import Content from './Content';
@@ -45,11 +52,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
 }));
 
 function Landing(props) {
@@ -62,16 +64,47 @@ function Landing(props) {
 
   const [selectedChat, setselectedChat] = useState(page);
 
+  const getUsers = users => {
+    return users.length > 1 ? users[0].user + ', ...' : users[0].user;
+  };
+
+  const handleChange = (id) => {
+    history.push(`/${id}`);
+    setselectedChat(id);
+  };
+
 
   return (
     <div className={classes.root}>
       <CssBaseline />
 
-      <Sidebar messages={messages}/>
+      <Grid container>
+        <Grid item md={3}>
+          <Drawer
+            variant="permanent"
+          >
+            <List className={classes.list}>
+                {messages.map(({ id, users, content }) => (
+                  <React.Fragment key={id}>
+                    <ListItem button onClick={() => handleChange(id)}>
+                      <ListItemAvatar>
+                        <Avatar alt="Profile Picture" src={users[0].image} />
+                      </ListItemAvatar>
+                      <ListItemText primary={getUsers(users)} secondary={content[0].text.substr(0, 15) + ' ... '} />
+                    </ListItem>
+                  </React.Fragment>
+                ))}
+              </List>
+              
+            <Button variant="contained">New Conversation</Button>
+          </Drawer>
+        </Grid>
 
-      <main className={classes.content}>
-        <Content messages={messages} page={selectedChat} />
-      </main>
+        <Grid item md={9}>
+          <Content messages={messages} page={selectedChat} />
+        </Grid>
+
+      </Grid>
     </div>
   );
 }

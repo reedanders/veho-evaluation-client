@@ -19,11 +19,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Messages(props) {
   const { content } = props;
   const classes = useStyles();
-  const [chat, setChat] = useState(content)
 
   return (
     <React.Fragment>
-      {chat.map(({ id, timestamp, text}) => (
+      {content.map(({ id, timestamp, text}) => (
         <React.Fragment key={id}>
           <p>{timestamp}</p>
         </React.Fragment>

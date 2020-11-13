@@ -10,38 +10,23 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
-  },
+
 }));
 
 export default function Sidebar(props) {
-  const { messages } = props;
+  const { messages, history } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
   const getUsers = users => {
     return users.length > 1 ? users[0].user + ', ...' : users[0].user;
+  };
+
+  const handleChange = (event, newValue) => {
+    history.push('/1');
+    // setselectedChat(1);
   };
 
   return (
@@ -55,7 +40,7 @@ export default function Sidebar(props) {
       <List className={classes.list}>
           {messages.map(({ id, users, content }) => (
             <React.Fragment key={id}>
-              <ListItem button onClick={() => console.log('asdfdsf')}>
+              <ListItem button onClick={() => handleChange()}>
                 <ListItemAvatar>
                   <Avatar alt="Profile Picture" src={users[0].image} />
                 </ListItemAvatar>
