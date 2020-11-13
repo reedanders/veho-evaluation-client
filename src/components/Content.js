@@ -33,7 +33,7 @@ export default function Content(props) {
     
     setChat(messages.filter(msg => msg.id === parseInt(page))[0]);
 
-  }, [page]);
+  }, [messages, page]);
 
   return (chat &&
     <Container maxWidth="lg" className={classes.container}>

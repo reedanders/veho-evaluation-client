@@ -25,7 +25,7 @@ export default function Namebar(props) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            {users[0].user}
+            {users.map(x => x.user).join(', ')}
           </Typography>
         </Toolbar>
       </AppBar>

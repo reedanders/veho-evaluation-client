@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -10,7 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 
-import Sidebar from './Sidebar';
 import Content from './Content';
 
 import adamg from '../assets/images/adamg.png';
@@ -32,7 +31,7 @@ const messages = [
   },
   {
     id: 3,
-    users: [{user: 'James L', image: jamesl}, {user: 'James L', image: hamarz},],
+    users: [{user: 'James L', image: jamesl}, {user: 'Hamar Z', image: hamarz},],
     content: [{timestamp: 333333, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
   },
   {
@@ -65,15 +64,16 @@ const useStyles = makeStyles((theme) => ({
 function Landing(props) {
   const classes = useStyles();
 
-  // Get page value from router
+  // Routing utils for tab navigation
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
 
-  const [selectedChat, setselectedChat] = useState(page);
+  const [selectedChat, setselectedChat] = useState(1);
 
   const getUsers = users => {
-    return users.length > 1 ? users[0].user + ', ...' : users[0].user;
+    const joinedUsers = users.map(x => x.user).join(', ');
+    return joinedUsers.length > 15 ? joinedUsers.substr(0, 15) + ' ... ' : joinedUsers;
   };
 
   const handleChange = (id) => {
@@ -81,8 +81,21 @@ function Landing(props) {
     setselectedChat(id);
   };
 
+  useEffect(() => {
+    
+    const ids = messages.map(msg => msg.id);
 
-  return (
+    if (ids.includes(page)) {
+      setselectedChat(page)
+    } else {
+      setselectedChat(1)
+      history.push(`/${1}`);
+    }
+
+  }, []);  
+
+
+  return ( selectedChat && 
     <div className={classes.root}>
       <CssBaseline />
           <Drawer
@@ -96,11 +109,11 @@ function Landing(props) {
             <List className={classes.list}>
                 {messages.map(({ id, users, content }) => (
                   <React.Fragment key={id}>
-                    <ListItem button onClick={() => handleChange(id)}>
+                    <ListItem button onClick={() => handleChange(id)} selected={selectedChat === id}>
                       <ListItemAvatar>
                         <Avatar alt="Profile Picture" src={users[0].image} />
                       </ListItemAvatar>
-                      <ListItemText primary={getUsers(users)} secondary={content[0].text.substr(0, 15) + ' ... '} />
+                      <ListItemText primary={getUsers(users)} secondary={content[0].text.substr(0, 20) + ' ... '} />
                     </ListItem>
                   </React.Fragment>
                 ))}
