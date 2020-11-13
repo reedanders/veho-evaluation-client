@@ -28,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const formatDate = (time) => {
+  const d = new Date(time);
+  return d.toDateString();
+}
+
 export default function Messages(props) {
   const { timestamp, text, user } = props;
   const classes = useStyles();
@@ -39,7 +44,7 @@ export default function Messages(props) {
         <Grid item>
           <Paper className={classes.paperUser}>{text}</Paper>
           <Typography variant="caption" className={classes.captionUser}>
-            {user.user} at {timestamp}
+            {user.user} on {formatDate(timestamp)}
           </Typography>
         </Grid>
       </Grid>
@@ -50,7 +55,7 @@ export default function Messages(props) {
         <Grid item>
           <Paper className={classes.paperGuest}>{text}</Paper>
           <Typography variant="caption" className={classes.captionGuest}>
-            {user.user} at {timestamp}
+            {user.user} on {formatDate(timestamp)}
           </Typography>
         </Grid>
       </Grid>

@@ -9,42 +9,11 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 import Content from './Content';
 
-import adamg from '../assets/images/adamg.png';
-import fredc from '../assets/images/fredc.png';
-import jamesl from '../assets/images/jamesl.png';
-import hamarz from '../assets/images/hamarz.png';
-import mylest from '../assets/images/mylest.png';
-
-const messages = [
-  {
-    id: 1,
-    users: [{user: 'Adam G', image: adamg}],
-    content: [{timestamp: 111111, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
-  },
-  {
-    id: 2,
-    users: [{user: 'Fred C', image: fredc}],
-    content: [{timestamp: 222222, user: {user: 'Fred C', image: fredc}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
-  },
-  {
-    id: 3,
-    users: [{user: 'James L', image: jamesl}, {user: 'Hamar Z', image: hamarz},],
-    content: [{timestamp: 333333, user: {user: 'Adam G', image: adamg}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
-  },
-  {
-    id: 4,
-    users: [{user: 'Hamar Z', image: hamarz},],
-    content: [{timestamp: 444444, user: {user: 'Hamar Z', image: hamarz}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
-  },
-  {
-    id: 5,
-    users: [{user: 'Myles T', image: mylest},],
-    content: [{timestamp: 555555, user: {user: 'Myles T', image: mylest}, text: "I'll be in the neighbourhood this week. Let's grab a bite to eat"}],
-  },
-];
+import { initMessages } from '../libs/dataLib';
 
 const drawerWidth = 240;
 
@@ -70,6 +39,8 @@ function Landing(props) {
   const { page } = params;
 
   const [selectedChat, setselectedChat] = useState(1);
+  const [messages, setMessages] = useState(initMessages);
+  const [input, setInput] = useState("");
 
   const getUsers = users => {
     const joinedUsers = users.map(x => x.user).join(', ');
@@ -79,7 +50,30 @@ function Landing(props) {
   const handleChange = (id) => {
     history.push(`/${id}`);
     setselectedChat(id);
+    setInput("");
   };
+
+  function updateChat(input) {
+    const index = messages.findIndex(msg => msg.id === parseInt(selectedChat));
+    const newInput = {'timestamp': Date.now(), 'user': {'user': 'Reed A', 'image':'todo'}, 'text': input.input,};
+    
+    messages[index].content.push(newInput)
+
+    console.log(input, index, messages[index]);
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      await updateChat({
+        input,
+      });
+      history.push(`/${selectedChat}`);
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   useEffect(() => {
     
@@ -123,8 +117,24 @@ function Landing(props) {
           </Drawer>
         
 
-      <Grid container>
-        <Content messages={messages} page={selectedChat} />
+      <Grid container direction="column">
+        <Grid item>
+          <Content messages={messages} page={selectedChat} />
+        </Grid>
+        <Grid item>
+          <form className={classes.root} noValidate onSubmit={handleSubmit}>
+            <TextField 
+              id="text" 
+              value={input}
+              variant="outlined" 
+              onChange={(e) => setInput(e.target.value)}/>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary">Send
+            </Button>
+          </form>
+        </Grid>
       </Grid>
 
     </div>

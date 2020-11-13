@@ -24,8 +24,8 @@ export default function Messages(props) {
   return (
     <div className={classes.root}>
       <Grid container direction="column" spacing={3}>
-        {content.map(({ id, timestamp, text, user}) => (
-            <ChatBubble key={id} timestamp={timestamp} text={text} user={user}/>
+        {content.map(({ timestamp, text, user}) => (
+            <ChatBubble key={timestamp} timestamp={timestamp} text={text} user={user}/>
         ))}
       </Grid>
     </div>
