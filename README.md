@@ -26,7 +26,7 @@ The conversation application is very similar in structure to a dashboard app. It
 
 ### Limitations
 
-Below are some of the items I didn't finish within the alloted 6 hours, but I still wanted the app mostly complete and worked more an hour more to complete them. (There was an useEffect warning I just needed to finish...) You can find this _almost_ complete branch here:
+Below are some of the items I didn't finish within the allotted 6 hours, but I still wanted the app mostly complete and worked an hour more to complete them. You can find this _almost_ complete branch here:
 
 ```
 git checkout complete
